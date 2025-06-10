@@ -43,18 +43,39 @@ feel free to follow the steps below.
 <summary>See walkthrough</summary>
 
 1. Get the username of the person who made the post about EmptyStack in `forum_posts`.
+<!--SELECT * FROM forum_posts WHERE CAST(date AS text) LIKE '2048-04%' AND content LIKE '%EmptyStack%';
+The username would smart-money-44 because that mention both there dad and 'EmptyStack'
+  -->
 2. Get the last name of the person associated with that username in `forum_accounts`.
+<!--SELECT * FROM forum_accounts WHERE username = 'smart-money-44';  
+Last name is Steele
+-->
 3. Find all other accounts with the same last name.
+<!-- SELECT * FROM  forum_accounts WHERE last_name = 'Steele'; -->
+
 4. Find all accounts in `emptystack_accounts` with the same last name.
+<!-- SELECT * FROM emptystack_accounts WHERE last_name = 'Steele'; -->
+
 5. There will only be one EmptyStack employee with a forum account. Use their credentials
    to access `node mainframe`, which will output a new `sql` file for you to run.
+<!-- Run 'node mainframe.js'  
+run 'psql -f emptystack.sql
+run psql
+connect to mainframe_override
+-->
 6. Find the message in `emptystack_messages` that mentions a project involving
    self-driving taxis. That message is sent from an admin account and also reveals
    the project code.
-7. Get the credentials for the admin account from `emptystack_accounts`.
-8. Get the ID of the project from `emptystack_projects`.
-9. Use that information to stop the project: `node mainframe -stop`!
+<!-- SELECT * FROM emptystack_messages WHERE LOWER(body) LIKE '%taxi%'; -->
 
+7. Get the credentials for the admin account from `emptystack_accounts`.
+<!-- SELECT * FROM emptystack_accounts WHERE username = 'your-boss-99'; -->
+
+8. Get the ID of the project from `emptystack_projects`.
+<!-- SELECT * FROM emptystack_projects WHERE code = 'TAXI'; -->
+
+9. Use that information to stop the project: `node mainframe -stop`!
+![alt text](image.png)
 </details>
 
 ## Submission
